@@ -9,6 +9,7 @@ public class CollisonDetector : MonoBehaviour
     void Start()
     {
         playerC = gameObject.GetComponent<PlayerControl>();
+        
     }
 
     // Update is called once per frame
@@ -22,8 +23,23 @@ public class CollisonDetector : MonoBehaviour
         if(collision.gameObject.CompareTag("Tree"))
         {
             Debug.Log($"{this} hit a Tree!");
+            playerC.enabled = false;
 
-            playerC.speed = 5;
+            Vector3 knockback = new Vector3(0, -200, -100);
+            transform.Translate(knockback * Time.deltaTime, Space.Self);
+
+            StartCoroutine(KnockbackTimer());
+
         }
+    }
+
+    IEnumerator KnockbackTimer()
+    {
+        Debug.Log("Player Stunned " + Time.time);
+
+        yield return new WaitForSeconds(3);
+        playerC.enabled = true;
+
+        Debug.Log("Player Unstunned " + Time.time);
     }
 }
