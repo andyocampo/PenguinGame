@@ -37,6 +37,7 @@ public class CollisonDetector : MonoBehaviour
     {
         Debug.Log("Player Stunned " + Time.time);
 
+        playerC.speed = 15;
         yield return new WaitForSeconds(3);
         playerC.enabled = true;
 

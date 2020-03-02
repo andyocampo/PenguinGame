@@ -8,11 +8,13 @@ public class PlayerControl : MonoBehaviour
     public float speed = 3;
     float jumpForce = 10;
     Rigidbody rB;
+    Vector3 eulerRotate;
 
     // Start is called before the first frame update
     void Start()
     {
         rB = gameObject.GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
@@ -21,9 +23,10 @@ public class PlayerControl : MonoBehaviour
         float hInput = Input.GetAxis("Horizontal") * rotationSpeed;
         Vector3 fSpeed = (speed * Vector3.up * Time.deltaTime);
         hInput *= Time.deltaTime;
-        
+        eulerRotate = new Vector3(0, 0, hInput);
 
-        transform.Translate(hInput, 0, 0);
+        //transform.Translate(hInput, 0, 0);
+        transform.Rotate(-eulerRotate * 10, Space.Self);
         transform.Translate(fSpeed, Space.Self);
         Jump();
     }

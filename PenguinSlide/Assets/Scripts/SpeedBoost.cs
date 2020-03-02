@@ -22,12 +22,13 @@ public class SpeedBoost : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Power")
+        if(other.gameObject.CompareTag("Player"))
         {
             Debug.Log("POWERUP OBTAINED!!");
-            Destroy(other.gameObject);
+            Destroy(gameObject);
             StartCoroutine(BoostTimer());
         }
+
     }
 
 
