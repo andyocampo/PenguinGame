@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tree
   - Power
+  - Ground
   layers:
   - Default
   - TransparentFX

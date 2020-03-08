@@ -6,7 +6,9 @@ public class PlayerControl : MonoBehaviour
 {
     float rotationSpeed = 5;
     public float speed = 3;
-    float jumpForce = 10;
+    float jumpForce = 15;
+    float rotateLimit = 25;
+    public bool hasJumped = false;
     Rigidbody rB;
     Vector3 eulerRotate;
 
@@ -14,7 +16,6 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         rB = gameObject.GetComponent<Rigidbody>();
-
     }
 
     // Update is called once per frame
@@ -26,17 +27,25 @@ public class PlayerControl : MonoBehaviour
         eulerRotate = new Vector3(0, 0, hInput);
 
         //transform.Translate(hInput, 0, 0);
-        transform.Rotate(-eulerRotate * 10, Space.Self);
+        if (transform.rotation.z <= rotateLimit || transform.rotation.z >= -rotateLimit)
+        {
+            transform.Rotate(-eulerRotate.normalized * 50 * Time.deltaTime, Space.Self);
+        }
+        else
+        {
+            Debug.Log("LIMIT REACHED");
+        }
         transform.Translate(fSpeed, Space.Self);
         Jump();
     }
 
     private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+
+        if(Input.GetKeyDown(KeyCode.Space) && hasJumped == false)
         {
             jumpForce += Time.deltaTime;
-
+            hasJumped = true;
             rB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
