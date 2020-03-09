@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\MenuScripts\MenuButtons.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\PowerUpTracker.cs" />
+    <Compile Include="Assets\Scripts\RandomGeneration.cs" />
     <Compile Include="Assets\Scripts\Spin.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
