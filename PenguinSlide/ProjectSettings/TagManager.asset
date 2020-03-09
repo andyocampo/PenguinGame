@@ -7,6 +7,7 @@ TagManager:
   - Tree
   - Power
   - Ground
+  - Timer
   layers:
   - Default
   - TransparentFX
