@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spin : MonoBehaviour
 {
-    float rotateSpeed;
+    [SerializeField]float rotateSpeed;
 
     private void Start()
     {
