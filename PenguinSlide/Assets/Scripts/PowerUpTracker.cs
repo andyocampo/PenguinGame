@@ -37,13 +37,13 @@ public class PowerUpTracker : MonoBehaviour
         Debug.Log($"boost! {playerC.speed}");
         yield return new WaitForSeconds(waitTime);
         Debug.Log($"slow! {playerC.speed}");
-        if(playerC.speed > 15)
+        if(playerC.speed > 20)
         {
             playerC.speed -= 5;
         }
         else
         {
-            playerC.speed = 15;
+            playerC.speed = 20;
         }
     }
 }

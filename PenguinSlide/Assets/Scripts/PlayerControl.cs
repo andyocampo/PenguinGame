@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     float rotationSpeed = 50;
-    public float speed = 3;
-    float jumpForce = 20;
+    public float speed;
+    float jumpForce = 30;
     public bool hasJumped = false;
     Rigidbody rB;
     Vector3 eulerRotate;
     Vector3 rot;
-    int rotLeftLimit = 220;
-    int rotRightLimit = 140;
+    int rotLeftLimit = 250;
+    int rotRightLimit = 110;
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class PlayerControl : MonoBehaviour
         float hInput = Input.GetAxis("Horizontal") * rotationSpeed; //sets input
         Vector3 fSpeed = (speed * Vector3.up * Time.deltaTime); //sets speed and direction
         hInput *= Time.deltaTime; //input * time.deltatime
-        eulerRotate.z = hInput; //rotation = input
+        eulerRotate.z = hInput*3; //rotation = input
         Debug.Log($"{rot}");
 
         //transform.Translate(hInput, 0, 0);
@@ -36,12 +36,12 @@ public class PlayerControl : MonoBehaviour
         transform.Rotate(-eulerRotate, Space.Self);
         if (rot.z > rotLeftLimit) //limits player rotation left
         {
-            rot.Set(85, 180, 219);
+            rot.Set(85, rot.y, 249);//for some reason setting to rot.z to 220 disables right input
             transform.localRotation = Quaternion.Euler(rot);
         }
         else if(rot.z < rotRightLimit) //limits player rotation right
         {
-            rot.Set(85, 180, 140);
+            rot.Set(85, rot.y, 110);
             transform.localRotation = Quaternion.Euler(rot);
         }
 

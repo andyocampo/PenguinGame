@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CollisonDetector : MonoBehaviour
 {
-    bool invulnerable;
-    float knockback = -10f;
+    bool IsInvulnerable;
+    float knockback = -15f;
     Quaternion defRotation;
     Vector3 point;
     PlayerControl playerC; 
@@ -36,7 +36,7 @@ public class CollisonDetector : MonoBehaviour
         //---------------------------------------------Hits Tree
         if(collision.gameObject.CompareTag("Tree"))
         {
-            if (invulnerable == false)
+            if (IsInvulnerable == false)
             {
                 Debug.Log($"{this} hit a Tree!");
                 playerC.enabled = false;//stops movement
@@ -74,7 +74,7 @@ public class CollisonDetector : MonoBehaviour
     IEnumerator Invulnerablity()
     {
         float invulnerablityTime = 20;
-        invulnerable = true;
+        IsInvulnerable = true;
         for (int i = 0; i < invulnerablityTime; i++)
         {
             playerMesh.enabled = false;
@@ -83,7 +83,7 @@ public class CollisonDetector : MonoBehaviour
             yield return new WaitForSeconds(.25f);
             invulnerablityTime--;
         }
-        invulnerable = false; 
+        IsInvulnerable = false; 
     }
 
     IEnumerator KnockbackTimer() //when player gets knocked back, short timer freezes them
