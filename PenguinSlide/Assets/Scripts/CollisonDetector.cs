@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class CollisonDetector : MonoBehaviour
 {
+    bool invulnerable;
     float knockback = -10f;
     Quaternion defRotation;
     Vector3 point;
     PlayerControl playerC; 
     Rigidbody rB;
     Timer timer;
+    Collider playerCollider;
+    MeshRenderer playerMesh;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +21,8 @@ public class CollisonDetector : MonoBehaviour
         rB = gameObject.GetComponent<Rigidbody>();
         timer = GameObject.Find("TimerText").GetComponent<Timer>();
         defRotation = transform.localRotation;
+        playerCollider = GetComponent<Collider>();
+        playerMesh = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -29,16 +35,25 @@ public class CollisonDetector : MonoBehaviour
 
         //---------------------------------------------Hits Tree
         if(collision.gameObject.CompareTag("Tree"))
-        { 
-            Debug.Log($"{this} hit a Tree!");
-            playerC.enabled = false;
+        {
+            if (invulnerable == false)
+            {
+                Debug.Log($"{this} hit a Tree!");
+                playerC.enabled = false;//stops movement
 
-            Vector3 Direction = collision.transform.position - transform.position;
+                Vector3 Direction = collision.transform.position - transform.position;
 
-            rB.AddForce(Direction.normalized * knockback, ForceMode.VelocityChange);
-            transform.localRotation = defRotation;
+                rB.AddForce(Direction.normalized * knockback, ForceMode.VelocityChange);
 
-            StartCoroutine(KnockbackTimer());
+                transform.localRotation = defRotation;//sets default rotation
+                StartCoroutine(Invulnerablity());
+                StartCoroutine(KnockbackTimer());
+            }
+            else
+            {
+                Physics.IgnoreCollision(collision.collider, playerCollider);
+            }
+
         }
         else if(collision.gameObject.CompareTag("Ground"))//----Touches Ground
         {
@@ -56,7 +71,22 @@ public class CollisonDetector : MonoBehaviour
 
     }
 
-    IEnumerator KnockbackTimer()
+    IEnumerator Invulnerablity()
+    {
+        float invulnerablityTime = 20;
+        invulnerable = true;
+        for (int i = 0; i < invulnerablityTime; i++)
+        {
+            playerMesh.enabled = false;
+            yield return new WaitForSeconds(.25f);
+            playerMesh.enabled = true;
+            yield return new WaitForSeconds(.25f);
+            invulnerablityTime--;
+        }
+        invulnerable = false; 
+    }
+
+    IEnumerator KnockbackTimer() //when player gets knocked back, short timer freezes them
     {
         Debug.Log("Player Stunned " + Time.time);
         playerC.speed = 15;

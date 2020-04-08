@@ -11,11 +11,13 @@ public class PlayerControl : MonoBehaviour
     Rigidbody rB;
     Vector3 eulerRotate;
     Vector3 rot;
+    int rotLeftLimit = 220;
+    int rotRightLimit = 140;
 
     void Start()
     {
         rB = gameObject.GetComponent<Rigidbody>();
-        rot.Set(110, 0, 0);//sets def rotation
+        rot.Set(95, 0, 0);//sets def rotation
         transform.localRotation = Quaternion.Euler(rot);//rotates to default
         //Debug.Log($"{rot}");
     }
@@ -27,21 +29,19 @@ public class PlayerControl : MonoBehaviour
         Vector3 fSpeed = (speed * Vector3.up * Time.deltaTime); //sets speed and direction
         hInput *= Time.deltaTime; //input * time.deltatime
         eulerRotate.z = hInput; //rotation = input
-        //Debug.Log($"{rot}");
+        Debug.Log($"{rot}");
 
         //transform.Translate(hInput, 0, 0);
-        if (rot.z <= 220 || rot.z >= 140) //if player rotation reaches those angles move
+        //if player rotation reaches those angles move
+        transform.Rotate(-eulerRotate, Space.Self);
+        if (rot.z > rotLeftLimit) //limits player rotation left
         {
-            transform.Rotate(-eulerRotate, Space.Self);
-        }
-        if (rot.z > 220) //limits player rotation left
-        {
-            rot.Set(70, 180, 220);
+            rot.Set(85, 180, 219);
             transform.localRotation = Quaternion.Euler(rot);
         }
-        else if(rot.z < 140) ////limits player rotation right
+        else if(rot.z < rotRightLimit) //limits player rotation right
         {
-            rot.Set(70, 180, 140);
+            rot.Set(85, 180, 140);
             transform.localRotation = Quaternion.Euler(rot);
         }
 
