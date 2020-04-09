@@ -41,7 +41,7 @@ public class PlayerControl : MonoBehaviour
         }
         else if(rot.z < rotRightLimit) //limits player rotation right
         {
-            rot.Set(85, rot.y, 110);
+            rot.Set(85, rot.y, 111);
             transform.localRotation = Quaternion.Euler(rot);
         }
 

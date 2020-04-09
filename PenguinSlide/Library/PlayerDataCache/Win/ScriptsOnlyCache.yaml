@@ -40,6 +40,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 28
       Script: {instanceID: 0}
+    - Class: 29
+      Script: {instanceID: 0}
     - Class: 33
       Script: {instanceID: 0}
     - Class: 43
@@ -73,6 +75,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9848}
     - Class: 114
+      Script: {instanceID: 9874}
+    - Class: 114
       Script: {instanceID: 10266}
     - Class: 114
       Script: {instanceID: 10294}
@@ -83,9 +87,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11084}
     - Class: 114
-      Script: {instanceID: 11452}
-    - Class: 114
-      Script: {instanceID: 18254}
+      Script: {instanceID: 11450}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -101,6 +103,8 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
     - Class: 258
+      Script: {instanceID: 0}
+    - Class: 363
       Script: {instanceID: 0}
     Assets/Scenes/Menus.unity:
     - Class: 1
@@ -140,9 +144,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9696}
     - Class: 114
-      Script: {instanceID: 9890}
+      Script: {instanceID: 9874}
     - Class: 114
-      Script: {instanceID: 10112}
+      Script: {instanceID: 9892}
+    - Class: 114
+      Script: {instanceID: 10114}
     - Class: 114
       Script: {instanceID: 10266}
     - Class: 114
@@ -158,13 +164,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11084}
     - Class: 114
-      Script: {instanceID: 11248}
+      Script: {instanceID: 11246}
     - Class: 114
-      Script: {instanceID: 11360}
+      Script: {instanceID: 11358}
     - Class: 114
-      Script: {instanceID: 11452}
-    - Class: 114
-      Script: {instanceID: 18254}
+      Script: {instanceID: 11450}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -254,6 +258,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro
     className: TMP_PhoneNumberValidator
+  - hash:
+      serializedVersion: 2
+      Hash: 5bddb32bcb848f51c6efb9a0b86ba855
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Spin
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -406,7 +416,7 @@ ScriptsOnlyBuild:
     className: TMP_TextEventHandler
   - hash:
       serializedVersion: 2
-      Hash: a20c1813d25978ba396ed615eb93f86d
+      Hash: 5b471ca29468d92f9e0fb59d1ea9a193
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Timer
@@ -622,7 +632,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 0cf38eeaf83d034d7b21d5284e055ea7
+      Hash: 83e769eee07fc231384c812eedbb8224
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FollowPlayer
@@ -830,14 +840,9 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Spin
   platform: 5
   scenePathNames:
   - Assets/Scenes/Menus.unity
   - Assets/Scenes/Level 1.unity
-  playerPath: D:/Users/Andy/Documents/GitHub/PenguinMidtermGame/PenguinSlide/Builds/PenguinSlide.exe
+  playerPath: D:/Users/Andy/Documents/GitHub/PenguinMidtermGame/PenguinSlide/Builds/Build
+    0.3/PenguinSlide/PenguinSlide.exe
