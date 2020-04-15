@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class PlayerControl : MonoBehaviour
         transform.Translate(fSpeed, Space.Self);//moves player forward
 
         Jump();
+        Restart();
     }
 
     private void Jump()
@@ -57,6 +59,14 @@ public class PlayerControl : MonoBehaviour
             jumpForce += Time.deltaTime;
             hasJumped = true;
             rB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+    }
+
+    private void Restart()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(1);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CollisonDetector : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class CollisonDetector : MonoBehaviour
     Timer timer;
     Collider playerCollider;
     MeshRenderer playerMesh;
+    GameObject FinishText;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,8 @@ public class CollisonDetector : MonoBehaviour
         defRotation = transform.localRotation;
         playerCollider = GetComponent<Collider>();
         playerMesh = GetComponent<MeshRenderer>();
+        FinishText = GameObject.Find("FINISHTEXT");
+        FinishText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -67,6 +71,7 @@ public class CollisonDetector : MonoBehaviour
             Debug.Log("Finished!");
             timer.enabled = false;
             playerC.enabled = false;
+            FinishText.SetActive(true);
         }
 
     }
@@ -88,11 +93,11 @@ public class CollisonDetector : MonoBehaviour
 
     IEnumerator KnockbackTimer() //when player gets knocked back, short timer freezes them
     {
-        Debug.Log("Player Stunned " + Time.time);
+        //Debug.Log("Player Stunned " + Time.time);
         playerC.speed = 15;
         yield return new WaitForSeconds(3);
         playerC.enabled = true;
 
-        Debug.Log("Player Unstunned " + Time.time);
+        //Debug.Log("Player Unstunned " + Time.time);
     }
 }
