@@ -6,12 +6,26 @@ using UnityEngine.SceneManagement;
 public class MenuButtons : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject playMenu;
     [SerializeField] GameObject creditsMenu;
 
-
-    public void Play()
+    public void SinglePlayer()
     {
+        
+        Time.timeScale = 1;
         SceneManager.LoadScene(1);
+    }
+
+    public void MultiPlayer()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(2);
+    }
+
+    public void PlayMenu()
+    {
+        mainMenu.SetActive(false);
+        playMenu.SetActive(true);
     }
 
     public void CreditsMenu()
@@ -23,7 +37,14 @@ public class MenuButtons : MonoBehaviour
     public void MainMenu()
     {
         creditsMenu.SetActive(false);
+        playMenu.SetActive(false);
         mainMenu.SetActive(true);
+    }
+
+    public void ReturnToMain()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
     }
 
     public void Exit()

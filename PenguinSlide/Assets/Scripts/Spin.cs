@@ -14,6 +14,13 @@ public class Spin : MonoBehaviour
     // spins power up
     void Update()
     {
-        transform.Rotate(0, rotateSpeed, 0, Space.Self);
+        if(Time.timeScale == 1)
+        {
+            transform.Rotate(0, rotateSpeed, 0, Space.Self);
+        }
+        else
+        {
+            transform.Rotate(0, 0, 0, Space.Self);
+        }
     }
 }

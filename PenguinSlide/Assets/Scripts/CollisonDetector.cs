@@ -7,14 +7,15 @@ public class CollisonDetector : MonoBehaviour
 {
     bool IsInvulnerable;
     float knockback = -15f;
+    bool isOnGround;
     Quaternion defRotation;
-    Vector3 point;
     PlayerControl playerC; 
     Rigidbody rB;
     Timer timer;
     Collider playerCollider;
     MeshRenderer playerMesh;
-    GameObject FinishText;
+   
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +26,6 @@ public class CollisonDetector : MonoBehaviour
         defRotation = transform.localRotation;
         playerCollider = GetComponent<Collider>();
         playerMesh = GetComponent<MeshRenderer>();
-        FinishText = GameObject.Find("FINISHTEXT");
-        FinishText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -43,8 +42,10 @@ public class CollisonDetector : MonoBehaviour
             if (IsInvulnerable == false)
             {
                 Debug.Log($"{this} hit a Tree!");
+                playerC.audioS2.Stop();//stops audio
+                playerC.audioS.Stop();//stops audio
                 playerC.enabled = false;//stops movement
-
+                isOnGround = false;
                 Vector3 Direction = collision.transform.position - transform.position;
 
                 rB.AddForce(Direction.normalized * knockback, ForceMode.VelocityChange);
@@ -61,19 +62,27 @@ public class CollisonDetector : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("Ground"))//----Touches Ground
         {
+            isOnGround = true;
             playerC.hasJumped = false;
+            if(playerC.enabled == true && isOnGround)
+            {
+                playerC.audioS.Play();
+            }
+            if(playerC.enabled == false)
+            {
+                playerC.audioS.Stop();
+            }
+            
         }
 
 
         //------------------------------------------------Reaches Finish
         if (collision.gameObject.CompareTag("Finish"))
         {
-            Debug.Log("Finished!");
-            timer.enabled = false;
-            playerC.enabled = false;
-            FinishText.SetActive(true);
+            playerC.speed = 1;
+            playerC.audioS.Stop();
+            playerC.audioS2.Stop();
         }
-
     }
 
     IEnumerator Invulnerablity()
@@ -88,16 +97,24 @@ public class CollisonDetector : MonoBehaviour
             yield return new WaitForSeconds(.25f);
             invulnerablityTime--;
         }
-        IsInvulnerable = false; 
+        IsInvulnerable = false;
+
     }
 
     IEnumerator KnockbackTimer() //when player gets knocked back, short timer freezes them
     {
         //Debug.Log("Player Stunned " + Time.time);
-        playerC.speed = 15;
+        playerC.speed = 20;
         yield return new WaitForSeconds(3);
         playerC.enabled = true;
-
+        if (isOnGround)
+        {
+            playerC.audioS.Play();
+        }
+        else
+        {
+            playerC.audioS.Stop();
+        }
         //Debug.Log("Player Unstunned " + Time.time);
     }
 }

@@ -6,14 +6,18 @@ using UnityEngine.SceneManagement;
 public class PlayerControl : MonoBehaviour
 {
     float rotationSpeed = 50;
-    public float speed;
+    public float speed = 20;
     float jumpForce = 30;
     public bool hasJumped = false;
-    Rigidbody rB;
-    Vector3 eulerRotate;
-    Vector3 rot;
     int rotLeftLimit = 250;
     int rotRightLimit = 110;
+    Rigidbody rB;
+    public AudioSource audioS;
+    public AudioSource audioS2;
+    Vector3 eulerRotate;
+    Vector3 rot;
+
+
 
     void Start()
     {
@@ -29,8 +33,8 @@ public class PlayerControl : MonoBehaviour
         float hInput = Input.GetAxis("Horizontal") * rotationSpeed; //sets input
         Vector3 fSpeed = (speed * Vector3.up * Time.deltaTime); //sets speed and direction
         hInput *= Time.deltaTime; //input * time.deltatime
-        eulerRotate.z = hInput*3; //rotation = input
-        Debug.Log($"{rot}");
+        eulerRotate.z = hInput*2; //rotation = input
+        //Debug.Log($"{rot}");
 
         //transform.Translate(hInput, 0, 0);
         //if player rotation reaches those angles move
@@ -49,24 +53,17 @@ public class PlayerControl : MonoBehaviour
         transform.Translate(fSpeed, Space.Self);//moves player forward
 
         Jump();
-        Restart();
     }
-
+    
     private void Jump()
     {
         if(Input.GetKeyDown(KeyCode.Space) && hasJumped == false)
         {
+            audioS.Stop();
             jumpForce += Time.deltaTime;
             hasJumped = true;
             rB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
-    private void Restart()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(1);
-        }
-    }
 }
